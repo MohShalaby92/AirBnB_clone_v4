@@ -1,0 +1,22 @@
+$(document).ready(function () {
+  // Object to store selected amenities
+  const selectedAmenities = {};
+
+  // Listen for changes on all input checkboxes
+  $('input[type="checkbox"]').change(function () {
+    const amenityId = $(this).data('id'); // Get Amenity ID from data-id attribute
+    const amenityName = $(this).data('name'); // Get Amenity name from data-name attribute
+
+    if ($(this).is(':checked')) {
+      // If checkbox is checked, add the Amenity to the selectedAmenities object
+      selectedAmenities[amenityId] = amenityName;
+    } else {
+      // If checkbox is unchecked, remove the Amenity from the selectedAmenities object
+      delete selectedAmenities[amenityId];
+    }
+
+    // Update the h4 tag inside the Amenities div with the list of selected amenities
+    const amenitiesList = Object.values(selectedAmenities).join(', ');
+    $('.amenities h4').text(amenitiesList);
+  });
+});
